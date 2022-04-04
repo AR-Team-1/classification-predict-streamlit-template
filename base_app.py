@@ -56,7 +56,7 @@ def main():
 	if selection == "Meet The Team":
 		st.subheader("Meet the Team")
 
-		image = Image.open('resources\imgs\helloimnick._meet the team.jpg')
+		image = Image.open('resources/imgs/helloimnick._meet the team.jpg')
 		st.image(image, caption="Photo Credit: Hello I'm, unsplash.com")
 
 		# You can read a markdown file from supporting resources folder
@@ -119,7 +119,7 @@ def main():
 	# Building out the prediction page
 	if selection == "Prediction":
 		#loading an image
-		image = Image.open('resources\imgs\kaitlyn-bakerPrediction.jpg')
+		image = Image.open('resources/imgs/kaitlyn-bakerPrediction.jpg')
 		st.image(image, caption='Photo Credit: Kaitlyn Baker, unsplash.com')
 		st.info("Prediction with ML Models")
 
