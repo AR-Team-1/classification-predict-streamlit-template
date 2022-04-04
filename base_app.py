@@ -104,7 +104,7 @@ def main():
 	# Building out the prediction page
 	if selection == "Prediction":
 		#loading an image
-		image = Image.open('resources\imgs\joshua-sortino.jpg')
+		image = Image.open('resources/imgs/joshua-sortino.jpg')
 		st.image(image, caption='Photo Credit: Joshua Sortino, Unsplash')
 		st.info("Prediction with ML Models")
 
