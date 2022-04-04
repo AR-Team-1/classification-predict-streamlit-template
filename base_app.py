@@ -42,13 +42,11 @@ def main():
 
 	# Creates a main title and subheader on your page -
 	# these are static across all pages
-	st.title("Tweet Classifer")
-	st.subheader("Climate change tweet classification")
+	st.title("TWEET CLASSIFIER")
 
-	# Creating sidebar with selection box -
+	# Creating sidebar with radio buttons -
 	# you can create multiple pages this way
 	options = ["Prediction", "Information", "Data Visualization", "Meet The Team", "About Us"]
-	#selection = st.sidebar.selectbox("Choose Option", options)
 
 	with st.sidebar:
 		selection = st.radio("Explore Our Options", options)
@@ -56,16 +54,16 @@ def main():
 
 	# Building out the "Meet The Team" page
 	if selection == "Meet The Team":
-		st.info("About The Team")
+		st.subheader("Meet the Team")
 		# You can read a markdown file from supporting resources folder
 		st.markdown("""
 		
 		Our team consists of 5 talented data scientists and developers from various parts of Africa. These are:
-		- Lungisa Joctrey
-		- Christian Miri
-		- Precious Orekha
-		- Ibrahim Isarki
-		- Caleb Tanko
+		- Lungisa Joctrey (South Africa)
+		- Christian Miri  (Nigeria)
+		- Precious Orekha (Nigeria)
+		- Ibrahim Isarki  (Nigeria)
+		- Caleb Tanko     (Nigeria)
 
 		""")
 
@@ -89,7 +87,8 @@ def main():
 
 	# Building out the "Information" page
 	if selection == "Information":
-		st.info("General Information")
+		#st.info("General Information")
+		st.subheader("General Information")
 		# You can read a markdown file from supporting resources folder
 		st.markdown("""
 		The end goal of this research is to look at the tweets from individuals and determine if that particular person believes in the climate change or not. We have created and trained several models that can do this task.  
@@ -104,9 +103,16 @@ def main():
 
 	# Building out the prediction page
 	if selection == "Prediction":
+		#loading an image
+		image = Image.open('resources\imgs\joshua-sortino.jpg')
+		st.image(image, caption='Photo Credit: Joshua Sortino, Unsplash')
 		st.info("Prediction with ML Models")
+
 		# Creating a text box for user input
 		tweet_text = st.text_area("Enter Text","Type Here")
+		models = [
+
+		]
 
 		if st.button("Classify"):
 			# Transforming user input with vectorizer
@@ -116,11 +122,18 @@ def main():
 			predictor = joblib.load(open(os.path.join("resources/Logistic_regression.pkl"),"rb"))
 			prediction = predictor.predict(vect_text)
 
+			#makin prediction is humanly understable
+
+			if prediction == [0]:
+				pred_class = "Likely not a believer in climate change"
+			else:
+				pred_class = "Likely a believer in climate change"	
+
 
 			# When model has successfully run, will print prediction
 			# You can use a dictionary or similar structure to make this output
 			# more human interpretable.
-			st.success("Text Categorized as: {}".format(prediction))
+			st.success("Text Categorized as: {}".format(pred_class))
 
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
