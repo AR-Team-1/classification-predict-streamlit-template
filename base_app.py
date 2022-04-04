@@ -119,9 +119,10 @@ def main():
 	# Building out the prediction page
 	if selection == "Prediction":
 		#loading an image
+		st.subheader("Prediction with ML Models")
 		image = Image.open('resources/imgs/kaitlyn-bakerPrediction.jpg')
 		st.image(image, caption='Photo Credit: Kaitlyn Baker, unsplash.com')
-		st.info("Prediction with ML Models")
+		
 
 		# Creating a text box for user input
 		tweet_text = st.text_area("Try it","Type your text here")
