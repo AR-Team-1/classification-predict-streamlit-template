@@ -104,6 +104,10 @@ def main():
 	if selection == "Information":
 		#st.info("General Information")
 		st.subheader("General Information")
+		#
+		image = Image.open('resources/imgs/ux-indonesia_.jpg')
+		st.image(image, caption='Photo Credit: Fabio, unsplash.com')
+
 		# You can read a markdown file from supporting resources folder
 		st.markdown("""
 		The end goal of this research is to look at the tweets from individuals and determine if that particular person believes in the climate change or not. We have created and trained several models that can do this task.  
