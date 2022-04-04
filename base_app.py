@@ -106,7 +106,7 @@ def main():
 		st.subheader("General Information")
 		#
 		image = Image.open('resources/imgs/ux-indonesia_.jpg')
-		st.image(image, caption='Photo Credit: Fabio, unsplash.com')
+		st.image(image, caption='Photo Credit: ux, unsplash.com')
 
 		# You can read a markdown file from supporting resources folder
 		st.markdown("""
