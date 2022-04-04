@@ -55,6 +55,10 @@ def main():
 	# Building out the "Meet The Team" page
 	if selection == "Meet The Team":
 		st.subheader("Meet the Team")
+
+		image = Image.open('resources\imgs\helloimnick._meet the team.jpg')
+		st.image(image, caption="Photo Credit: Hello I'm, unsplash.com")
+
 		# You can read a markdown file from supporting resources folder
 		st.markdown("""
 		
@@ -67,13 +71,13 @@ def main():
 
 		""")
 
-# Building out the "About Us" page
+	# Building out the "About Us" page
 	if selection == "About Us":
-		st.write("""### PLICC Analytics""")
+		st.subheader("PLICC Analytics")
 		#Company logo
 
 		image = Image.open('resources/imgs/logo_thingy.jpeg')
-		st.image(image, caption='')
+		st.image(image, caption='Photo Credit: Ibrahim Sarki')
 		# You can read a markdown file from supporting resources folder
 		st.markdown("""
 		PLICC ANALYTICS specializes in Information Technology Services. We take 
@@ -82,6 +86,17 @@ def main():
 		Our team of leading data scientists work tirelessly to make your life and the life of your customers easy.
 		"""
 		)
+
+	# Building out the "Data Visualisation" page
+	if selection == "Data Visualization":
+		st.subheader("Data Visualization")
+		#Company logo
+
+		image = Image.open('resources/imgs/fabio-unsplash,DataViz.jpg')
+		st.image(image, caption='Photo Credit: Fabio, unsplash.com')
+	
+		# You can read a markdown file from supporting resources folder
+		st.markdown("")
 
 		
 
@@ -104,36 +119,117 @@ def main():
 	# Building out the prediction page
 	if selection == "Prediction":
 		#loading an image
-		image = Image.open('resources/imgs/joshua-sortino.jpg')
-		st.image(image, caption='Photo Credit: Joshua Sortino, Unsplash')
+		image = Image.open('resources\imgs\kaitlyn-bakerPrediction.jpg')
+		st.image(image, caption='Photo Credit: Kaitlyn Baker, unsplash.com')
 		st.info("Prediction with ML Models")
 
 		# Creating a text box for user input
-		tweet_text = st.text_area("Enter Text","Type Here")
-		models = [
+		tweet_text = st.text_area("Try it","Type your text here")
+		models = ["Logistic Regression","SVM","Naive Bayes Classifier" ]
 
-		]
+		#creating a selection for panel fo models
+		choice = st.radio("Choose A Model", models)
 
-		if st.button("Classify"):
-			# Transforming user input with vectorizer
-			vect_text = tweet_cv.transform([tweet_text]).toarray()
-			# Load your .pkl file with the model of your choice + make predictions
-			# Try loading in multiple models to give the user a choice
-			predictor = joblib.load(open(os.path.join("resources/Logistic_regression.pkl"),"rb"))
-			prediction = predictor.predict(vect_text)
+		#Setting conditions when the user chooses "Logistic Regression"
+		if choice == "Logistic Regression":
+			st.info("You chose Logistic Regression")
 
-			#makin prediction is humanly understable
+			if st.button("Classify"):
+				# Transforming user input with vectorizer
+				vect_text = tweet_cv.transform([tweet_text]).toarray()
+				# Load your .pkl file with the model of your choice + make predictions
+				# Try loading in multiple models to give the user a choice
+				predictor = joblib.load(open(os.path.join("resources/Logistic_regression.pkl"),"rb"))
+				prediction = predictor.predict(vect_text)
 
-			if prediction == [0]:
-				pred_class = "Likely not a believer in climate change"
-			else:
-				pred_class = "Likely a believer in climate change"	
+				#makin prediction is humanly understable
+
+				if prediction == [0]:
+					pred_class = "Likely not a believer in climate change"
+				else:
+					pred_class = "Likely a believer in climate change"	
 
 
-			# When model has successfully run, will print prediction
-			# You can use a dictionary or similar structure to make this output
-			# more human interpretable.
-			st.success("Text Categorized as: {}".format(pred_class))
+				# When model has successfully run, will print prediction
+				# You can use a dictionary or similar structure to make this output
+				# more human interpretable.
+				st.success("Text Categorized as: {}".format(pred_class))
+
+		#Setting conditions when the user chooses "SVM"
+		if choice == "SVM":
+			st.info("You chose Support Vector Machines")
+
+			if st.button("Classify"):
+				# Transforming user input with vectorizer
+				vect_text = tweet_cv.transform([tweet_text]).toarray()
+				# Load your .pkl file with the model of your choice + make predictions
+				# Try loading in multiple models to give the user a choice
+				predictor = joblib.load(open(os.path.join("resources/Logistic_regression.pkl"),"rb"))
+				prediction = predictor.predict(vect_text)
+
+				#makin prediction is humanly understable
+
+				if prediction == [0]:
+					pred_class = "Likely not a believer in climate change"
+				else:
+					pred_class = "Likely a believer in climate change"	
+
+
+				# When model has successfully run, will print prediction
+				# You can use a dictionary or similar structure to make this output
+				# more human interpretable.
+				st.success("Text Categorized as: {}".format(pred_class))
+
+		#Setting conditions when the user chooses "Naive Bayes Classifier"
+		if choice == "Naive Bayes Classifier":
+			st.info("You chose Naive Bayes Classifier")
+
+			if st.button("Classify"):
+				# Transforming user input with vectorizer
+				vect_text = tweet_cv.transform([tweet_text]).toarray()
+				# Load your .pkl file with the model of your choice + make predictions
+				# Try loading in multiple models to give the user a choice
+				predictor = joblib.load(open(os.path.join("resources/Logistic_regression.pkl"),"rb"))
+				prediction = predictor.predict(vect_text)
+
+				#makin prediction is humanly understable
+
+				if prediction == [0]:
+					pred_class = "Likely not a believer in climate change"
+				else:
+					pred_class = "Likely a believer in climate change"	
+
+
+				# When model has successfully run, will print prediction
+				# You can use a dictionary or similar structure to make this output
+				# more human interpretable.
+				st.success("Text Categorized as: {}".format(pred_class))
+
+
+		#Setting conditions when the user chooses "X"
+		if choice == "X":
+			st.info("You chose X")
+
+			if st.button("Classify"):
+				# Transforming user input with vectorizer
+				vect_text = tweet_cv.transform([tweet_text]).toarray()
+				# Load your .pkl file with the model of your choice + make predictions
+				# Try loading in multiple models to give the user a choice
+				predictor = joblib.load(open(os.path.join("resources/Logistic_regression.pkl"),"rb"))
+				prediction = predictor.predict(vect_text)
+
+				#makin prediction is humanly understable
+
+				if prediction == [0]:
+					pred_class = "Likely not a believer in climate change"
+				else:
+					pred_class = "Likely a believer in climate change"	
+
+
+				# When model has successfully run, will print prediction
+				# You can use a dictionary or similar structure to make this output
+				# more human interpretable.
+				st.success("Text Categorized as: {}".format(pred_class))
 
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
