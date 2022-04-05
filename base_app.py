@@ -49,6 +49,9 @@ def main():
 	options = ["Prediction", "Information", "Data Visualization", "Meet The Team", "About Us"]
 
 	with st.sidebar:
+		image = Image.open('resources/imgs/logo_thingy.jpeg')
+		st.image(image, caption="", width=150)
+		st.markdown("""## Navigation""")
 		selection = st.radio("Explore Our Options", options)
 	
 
@@ -90,11 +93,29 @@ def main():
 	# Building out the "Data Visualisation" page
 	if selection == "Data Visualization":
 		st.subheader("Data Visualization")
+		#displays an image 
 		image = Image.open('resources/imgs/fabio-unsplash,DataViz.jpg')
 		st.image(image, caption='Photo Credit: Fabio, unsplash.com')
-		sentiments = ["All", "Positive", "Negative", "Neutral"]
 
-		st.radio("Climate Change Sentiments", sentiments)
+		#creating visual options for Data Visualisation
+		sentiments = ["All", "positive", "negative", "neutral"]
+
+		sentiment = st.radio("Climate Change Sentiments", sentiments)
+
+		#EDA for all sentiments
+		if sentiment == "All":
+			st.info("You are Viewing: Data Analysis for people")
+
+		#EDA for positive sentiments
+		if sentiment == "positive":
+			st.info("You are Viewing: Data Analysis for believers in climate change")
+		#EDA for negative sentiments
+		if sentiment == "negative":
+			st.info("You are viewing: Data Analysis for non-believers in climate change")
+		#EDA for neutral sentiments
+		if sentiment == "neutral":
+			st.info("You are Viewing: Data Analysis for people who do give a shit about climate change")
+
 
 		
 
