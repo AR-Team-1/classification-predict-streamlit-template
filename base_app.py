@@ -90,6 +90,11 @@ def main():
 		"""
 		)
 
+		st.write(""" 
+		For info:
+		email: info@pliccanalytics.com
+		""")
+
 	# Building out the "Data Visualisation" page
 	if selection == "Data Visualization":
 		st.subheader("Data Visualization")
@@ -98,7 +103,8 @@ def main():
 		st.image(image, caption='Photo Credit: Fabio, unsplash.com')
 
 		#creating visual options for Data Visualisation
-		sentiments = ["All", "positive", "negative", "neutral"]
+		sentiments = ["All", "positive", "neutral", "negative"]
+
 
 		sentiment = st.radio("Climate Change Sentiments", sentiments)
 
@@ -106,16 +112,50 @@ def main():
 		if sentiment == "All":
 			st.info("You are Viewing: Data Analysis for people")
 
+			image = Image.open("resources/imgs/Otherwc.jpeg")
+			st.image(image,use_column_width=True)
+			st.markdown("""
+			The above word cloud, shows us that overall,
+
+			- climate change
+			- climate
+			- trump
+			- global warming
+
+			are words that often used in the tweets contained in our dataset our dataset 
+			""")
+
+			#Image of data distribution
+			image = Image.open("resources/imgs/distribution_sentiment.png")
+			st.image(image, use_column_width=True)
+
+			st.markdown("""
+
+			 In the image above we learn that our data is imbalanced and so we had to balance the data
+			 so that our models can be trained effectively. Below is the graph that showed a balanced dataset.
+			 
+			 """)
+
+			image = Image.open("resources/imgs/balance_data_distribution.png")
+			st.image(image, use_column_width=True)
+
 		#EDA for positive sentiments
 		if sentiment == "positive":
 			st.info("You are Viewing: Data Analysis for believers in climate change")
+			image = Image.open("resources/imgs/positive wc.jpeg")
+			st.image(image)
+
 		#EDA for negative sentiments
 		if sentiment == "negative":
 			st.info("You are viewing: Data Analysis for non-believers in climate change")
+			image = Image.open("resources/imgs/negativewc.jpeg")
+			st.image(image)
+
 		#EDA for neutral sentiments
 		if sentiment == "neutral":
 			st.info("You are Viewing: Data Analysis for people who do give a shit about climate change")
-
+			image = Image.open("resources/imgs/neutralwc.jpeg")
+			st.image(image)
 
 		
 
