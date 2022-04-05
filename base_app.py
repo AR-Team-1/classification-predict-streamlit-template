@@ -90,10 +90,15 @@ def main():
 	# Building out the "Data Visualisation" page
 	if selection == "Data Visualization":
 		st.subheader("Data Visualization")
-		#Company logo
-
 		image = Image.open('resources/imgs/fabio-unsplash,DataViz.jpg')
 		st.image(image, caption='Photo Credit: Fabio, unsplash.com')
+		sentiments = ["All", "Positive", "Negative", "Neutral"]
+
+		st.radio("Climate Change Sentiments", sentiments)
+
+		
+
+		
 	
 		# You can read a markdown file from supporting resources folder
 		st.markdown("")
