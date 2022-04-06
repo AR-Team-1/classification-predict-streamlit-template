@@ -30,7 +30,7 @@ from PIL import Image
 import pandas as pd
 
 # Vectorizer
-news_vectorizer = open("resources/tfidfvect.pkl","rb")
+news_vectorizer = open("resources/tfvect.pkl","rb")
 tweet_cv = joblib.load(news_vectorizer) # loading your vectorizer from the pkl file
 
 # Load your raw data
@@ -196,7 +196,7 @@ def main():
 
 		# Creating a text box for user input
 		tweet_text = st.text_area("Try it","Type your text here")
-		models = ["RBF SVM","Logistic Regression" ]
+		models = ["RBF SVM","Logistic Regression", "SVC"]
 
 		#creating a selection for panel fo models
 		choice = st.radio("Choose A Model", models)
@@ -252,6 +252,32 @@ def main():
 				# You can use a dictionary or similar structure to make this output
 				# more human interpretable.
 				st.success("Text Categorized as: {}".format(pred_class))
+
+		#Setting conditions when the user chooses "SVC"
+		if choice == "SVC":
+			st.info("You chose SVC")
+
+			if st.button("Classify"):
+				# Transforming user input with vectorizer
+				vect_text = tweet_cv.transform([tweet_text]).toarray()
+				# Load your .pkl file with the model of your choice + make predictions
+				# Try loading in multiple models to give the user a choice
+				predictor = joblib.load(open(os.path.join("resources/SVC.pkl"),"rb"))
+				prediction = predictor.predict(vect_text)
+
+				#makin prediction is humanly understable
+
+				if prediction == [0]:
+					pred_class = "Likely not a believer in climate change"
+				else:
+					pred_class = "Likely a believer in climate change"	
+
+
+				# When model has successfully run, will print prediction
+				# You can use a dictionary or similar structure to make this output
+				# more human interpretable.
+				st.success("Text Categorized as: {}".format(pred_class))
+
 
 
 # Required to let Streamlit instantiate our web app.  
