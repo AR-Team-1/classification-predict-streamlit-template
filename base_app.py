@@ -194,7 +194,7 @@ def main():
 		st.image(image, caption='Photo Credit: Kaitlyn Baker, unsplash.com')
 		
 
-		# Creating a text box for user input
+		# Creating a text box for user inputs
 		tweet_text = st.text_area("Try it","Type your text here")
 		models = ["RBF SVM","Logistic Regression", "SVC"]
 
