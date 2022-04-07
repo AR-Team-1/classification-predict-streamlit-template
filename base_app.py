@@ -90,8 +90,9 @@ def main():
 		"""
 		)
 
-		st.write(""" 
-		For info:
+		st.markdown(""" 
+		For more info:
+
 		email: info@pliccanalytics.com
 		""")
 
@@ -103,26 +104,29 @@ def main():
 		st.image(image, caption='Photo Credit: Fabio, unsplash.com')
 
 		#creating visual options for Data Visualisation
-		sentiments = ["All", "positive", "neutral", "negative"]
+		sentiments = ["All", "Positive Sentiment", "Neutral Sentiment", "Negative Sentiment"]
 
 
 		sentiment = st.radio("Climate Change Sentiments", sentiments)
 
 		#EDA for all sentiments
 		if sentiment == "All":
-			st.info("You are Viewing: Data Analysis for people")
+			st.info("You are Viewing: Data Analysis for all climate change sentiment groups")
+			st.markdown("""
+			When we receive our raw data we have to clean it and then do a thorough investingation on it so that 
+			we make sense. We refer to that investigation process as Exploratory Data Analysis (EDA). 
+			
+			""")
 
 			image = Image.open("resources/imgs/Otherwc.jpeg")
 			st.image(image,use_column_width=True)
 			st.markdown("""
-			The above word cloud, shows us that overall,
+			The above word cloud, shows us that overall,"climate change", "climate", "trump ", "global warming" and "threaten"
+			are words that are often used in the tweets contained in our dataset. It appears that surrounding climate change,
+			people have lot of elements they attach to it, in order to bolt their stance on whether they believe in climate change or not.
 
-			- climate change
-			- climate
-			- trump
-			- global warming
+			
 
-			are words that often used in the tweets contained in our dataset our dataset 
 			""")
 
 			#Image of data distribution
@@ -131,8 +135,12 @@ def main():
 
 			st.markdown("""
 
-			 In the image above we learn that our data is imbalanced and so we had to balance the data
-			 so that our models can be trained effectively. Below is the graph that showed a balanced dataset.
+			In the image above we learn that our data is imbalanced and so we had to balance the data
+			so that our models can be trained effectively. This means, those who believe in climate change as fact
+			outnumber those who no not believe in climate change and those who are indifferent to it. This will cause the image
+			to be baised towards the majority. Balancing the data will reduce chances for the model to side the data points it sees the most.
+			
+			Below is the graph that shows a balanced dataset.
 			 
 			 """)
 
@@ -140,22 +148,57 @@ def main():
 			st.image(image, use_column_width=True)
 
 		#EDA for positive sentiments
-		if sentiment == "positive":
+		if sentiment == "Positive Sentiment":
 			st.info("You are Viewing: Data Analysis for believers in climate change")
+			st.markdown("""
+			Below we take a look at the word cloud for words mentioned by people who believe in climate change.
+			And from it we seek to draw insight on this group and on what influences their sentimental position.
+			""")
 			image = Image.open("resources/imgs/positive wc.jpeg")
 			st.image(image)
+			st.markdown("""
+			In the wordcloud above we can see that, "climate change", "global warming","believe","evidence", "trump", and 
+			"climate" have the most mentions in the believing group. It seems like, a number of people perhaps blamed Donald Trump or 
+			appealed to Trump to do something in order to improve the situation with regards the climate chang topic.
+
+			""")
+
+
 
 		#EDA for negative sentiments
-		if sentiment == "negative":
+		if sentiment == "Negative Sentiment":
 			st.info("You are viewing: Data Analysis for non-believers in climate change")
+
+			st.markdown("""
+			Below we take a look at the word cloud for words mentioned by people who do not believe in climate change.
+			And from it we seek to draw insight on this group and on what influences their sentimental position.
+			""")
 			image = Image.open("resources/imgs/negativewc.jpeg")
 			st.image(image)
+			st.markdown("""
+			In the negative sentiment group a lot of people mentioned, "climate change", "global warm","hoax","al gore","manmade", "chinese",
+			"snowflakes","science" and "prove."
+
+			Noticing the mention of Al Gore, shows that those who do not believe in climate change are likely to blame Al Gore for inventing the idea.
+			most of them believe that climate is a hoax.
+			""")
+			
 
 		#EDA for neutral sentiments
-		if sentiment == "neutral":
-			st.info("You are Viewing: Data Analysis for people who do give a shit about climate change")
+		if sentiment == "Neutral Sentiment":
+
+			st.markdown("""
+			Below we take a look at the word cloud for words mentioned by people who are neutral in the climate change topic.
+			And from it we seek to draw insight on this group and on what influences their sentimental position.
+			""")
+			st.info("You are Viewing: Data Analysis for people who are indifferent about climate change")
 			image = Image.open("resources/imgs/neutralwc.jpeg")
 			st.image(image)
+			st.markdown("""
+			In the neutral group a lot of people mentioned, "climate change", "global warming","trump","warm",
+			"believe" and "bullshit." While neutral in sentiment, this group still enganged in the topic of climate change
+			with passion. 
+			""")
 
 		
 
@@ -178,13 +221,13 @@ def main():
 		st.markdown("""
 		The end goal of this research is to look at the tweets from individuals and determine if that particular person believes in the climate change or not. We have created and trained several models that can do this task.  
 
-		Below is the data used to train the model.
+		Below is the data used to train the models.
 		
 		""")
 
 		st.subheader("Raw Twitter data and label")
-		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
-			st.write(raw[['sentiment', 'message']]) # will write the df to the page
+		#showing raw data
+		st.write(raw[['sentiment', 'message']]) # will write the df to the page
 
 	# Building out the prediction page
 	if selection == "Prediction":
@@ -196,14 +239,19 @@ def main():
 
 		# Creating a text box for user inputs
 		tweet_text = st.text_area("Try it","Type your text here")
-		models = ["RBF SVM","Logistic Regression", "SVC"]
+		models = ["RBF SVM","Logistic Regression", "Support Vector Classifier(SVC)"]
 
 		#creating a selection for panel fo models
 		choice = st.radio("Choose A Model", models)
 
 		#Setting conditions when the user chooses "RBF SVM"
 		if choice == "RBF SVM":
-			st.info("You chose RBF SVM")
+			st.info("""
+			You chose RBF SVM. 
+			
+			In machine learning, the Radial Basis Function (RBF) kernel, or RBF kernel, is a popular kernel 
+			function used in various kernelized learning algorithms.
+			""")
 
 			if st.button("Classify"):
 				# Transforming user input with vectorizer
@@ -230,7 +278,13 @@ def main():
 
 		#Setting conditions when the user chooses "Logistic Regression"
 		if choice == "Logistic Regression":
-			st.info("You chose Logistic Regression")
+			st.info("""
+			You chose Logistic Regression
+
+			Logistic regression is a statistical analysis method to predict 
+			a binary outcome, such as yes or no, based on prior observations of a data set. 
+		
+			""")
 
 			if st.button("Classify"):
 				# Transforming user input with vectorizer
@@ -254,8 +308,13 @@ def main():
 				st.success("Text Categorized as: {}".format(pred_class))
 
 		#Setting conditions when the user chooses "SVC"
-		if choice == "SVC":
-			st.info("You chose SVC")
+		if choice == "Support Vector Classifier(SVC)":
+			st.info("""
+			You chose SVC
+
+			Support Vector Classifier is a nonparametric clustering algorithm that does not make any 
+			assumption on the number or shape of the clusters in the data.
+			""")
 
 			if st.button("Classify"):
 				# Transforming user input with vectorizer
